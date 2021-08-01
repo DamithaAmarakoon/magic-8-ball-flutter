@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
 
 void main() {
   runApp(MyApp());
@@ -29,8 +30,31 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int ballNumber = getRandomBallNumber();
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Image.asset('assets/images/ball$ballNumber.png'),
+        ),
+        FloatingActionButton(
+          onPressed: () {
+            setState(() {
+              ballNumber = getRandomBallNumber();
+            });
+          },
+          child: Text('Ask'),
+          backgroundColor: Colors.blueGrey[700],
+        )
+      ],
+    );
   }
+}
+
+int getRandomBallNumber() {
+  return Random().nextInt(5) + 1;
 }
